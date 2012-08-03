@@ -81,8 +81,11 @@ class Scaffold_Extension_Import extends Scaffold_Extension
 					$this->loaded[] = $file;
 					
 					# Use Scaffold to compile the inner CSS file
-					$inner = file_get_contents($file);
-					
+					//$inner = file_get_contents($file);
+					$SubSource = new Scaffold_Source_File($file);
+					$this->pre_process($SubSource, $scaffold);
+					$inner = $SubSource->contents;
+
 					# Replace the rule		
 					$source->contents = str_replace($rules[0][$key],$inner,$source->contents);
 				}
